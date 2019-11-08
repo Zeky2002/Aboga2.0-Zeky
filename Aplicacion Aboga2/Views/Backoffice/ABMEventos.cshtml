@@ -1,0 +1,36 @@
+﻿@using Aplicacion_Aboga2.Models
+@model Evento
+@{
+    {
+        ViewBag.Title = "ABMEventos";
+    }
+
+    <h2>ABMEventos</h2>
+
+
+    @Html.ActionLink("Volver atras", "Menu", "Backoffice")
+
+    using (Html.BeginForm("FormContactos", "Backoffice", FormMethod.Post))
+    {
+        <th>@Html.ActionLink("InsertarEvento", "InsertarEvento", "Backoffice", new { Accion = "Insertar", IdEx = ViewBag.IdExpediente, IdCont = ViewBag.IdContactos }, null)</th>
+        <table>
+            @foreach (Evento eve in  ViewBag.Eventos)
+            {
+            <tr>
+                <td>@eve.IdEvento<br /></td>
+                <td>@eve.IdExpediente<br /></td>
+                <td>@eve.IdContacto</td>
+                <td>@eve.Titulo</td>
+                <td>@eve.Descripcion</td>
+                <td>@eve.Fecha</td>
+                <td>@Html.ActionLink("Eliminar ", "FormEvento", "Backoffice", new { Accion = "Eliminar", Ideve = eve.IdEvento, IdEx = eve.IdExpediente, IdCont = eve.IdContacto}, null)</td>
+                <td>@Html.ActionLink("Modificar ", "FormEvento", "Backoffice", new { Accion = "Obtener", Ideve = eve.IdEvento, IdEx = eve.IdExpediente, IdCont = eve.IdContacto }, null)</td>
+                <td>@Html.ActionLink("Agregar EveArchivos", "FormExpediente", "Backoffice", new { Accion = "Agregar", Ideve = eve.IdEvento, IdEx = eve.IdExpediente, IdCont = eve.IdContacto }, null)</td>
+            </tr>
+            }
+        </table>
+    }
+}
+
+
+

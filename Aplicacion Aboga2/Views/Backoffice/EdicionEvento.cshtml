@@ -1,0 +1,62 @@
+﻿@using Aplicacion_Aboga2.Models
+@model Evento
+@{
+    ViewBag.Title = "Edicion Evento";
+}
+<html>
+<body>
+
+    <h2>Edicion Evento</h2>
+    <h3> O el IdContacto o el IdExpediente tienen que ser o  </h3>
+    <button id="btnAtras">Volver atras</button>
+    <br />
+
+    <br />
+
+    <table>
+        @using (Html.BeginForm("EdicionEvento", "Backoffice", FormMethod.Post))
+        {
+
+            @Html.HiddenFor(x => x.IdEvento)            
+
+            <tr>
+                <td> @Html.Label("IdContacto")</td>
+                <td> @Html.TextBoxFor(x => x.IdContacto, new {  @id = "IdContacto", @required = "required"  })</td>
+            </tr>
+
+            <tr>
+                <td> @Html.Label("IdExpediente")</td>
+                <td> @Html.TextBoxFor(x => x.IdExpediente, new {  @id = "IdExpediente", @required = "required"})</td>
+            </tr>
+
+            <tr>
+                <td> @Html.Label("Fecha")</td>
+                <td> @Html.TextBoxFor(x => x.Fecha, "{0:yyyy-MM-dd}", new {@id = "Fecha", type = "date", @required = "required" }) @Html.ValidationMessageFor(x=>x.Fecha)</td>
+            </tr>
+
+            <tr>
+                <td> @Html.Label("titulo")</td>
+                <td> @Html.TextBoxFor(x => x.Titulo, new { @required = "required" })</td>
+            </tr>
+            <tr>
+                <td> @Html.Label("Descripcion")</td>
+                <td> @Html.TextBoxFor(x => x.Descripcion, new { @required = "required" })</td>
+            </tr>
+
+            <input type="hidden" value="@ViewBag.Accion" name="Accion" />
+            <input type="submit" value="ModificarEvento" />
+        }
+    </table>
+
+</body>
+</html>
+<script>
+    
+        $(document).ready(function () {
+            $("#btnAtras").click(function () {
+                window.history.back();
+            });                      
+        }
+  
+</script>
+ 

@@ -1,0 +1,82 @@
+﻿@using Aplicacion_Aboga2.Models
+@model ExpedienteFojas
+@{
+    ViewBag.Title = "Insertar ExpedienteFojas";
+}
+
+<h1>InsertarFojas</h1>
+<!--Html.ActionLink("Volver atras", "ABMExpedienteFojas", "Backoffice")-->
+<button id="btnAtras">Volver atras</button>
+<br />
+<br />
+<table>
+    @using (Html.BeginForm("EdicionExpedienteFojas", "Backoffice", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.IdFojas)
+
+
+        <tr>
+            
+            <td> @Html.Label("id expediente")</td>
+            <td> @Html.TextBoxFor(x => x.IdExpediente, new { enabled = false })</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Fecha De Inicio"), </td>
+            <td> @Html.TextBoxFor(x => x.FechaInicio, "{0:yyyy-MM-dd}", new {@id = "FechaInicio" , type = "date", @required = "required", value = Model.FechaInicio })</td>
+            @Html.ValidationMessageFor(model => model.FechaInicio)
+
+        </tr>
+        <tr>
+            <td> @Html.Label("Fecha de Fin")</td>
+            <td> @Html.TextBoxFor(x => x.FechaFin, "{0:yyyy-MM-dd}", new { @id = "FechaFin", type = "date", @required = "required", value = Model.FechaFin })</td>
+            @Html.ValidationMessageFor(model => model.FechaFin)
+        </tr>
+
+        <tr>
+            <td> @Html.Label("Estado Especifico")</td>
+            <td> @Html.TextBoxFor(x => x.EstadoEspecifico, new { @required = "required", value = Model.EstadoEspecifico })</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Descripcion")</td>
+            <td> @Html.TextBoxFor(x => x.Descripcion, new { @required = "required", value = Model.Descripcion })</td>
+        </tr>
+        <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+        <input type="submit" value="InsertarFojas" />
+    }
+
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("#btnAtras").click(function () {
+            window.history.back();
+        });
+        $('form').submit(function (e) {
+            let fechaInicio = new Date($("#FechaInicio").val());
+            let fechaFin = new Date($("#FechaFin").val());
+            if (fechaInicio >= fechaFin) {
+                alert("Error");
+                e.preventDefault();
+            } else {
+                alert("Exito");
+            }
+        });
+    });
+</script>
+
+
+
+<!--<div class="editor-field">
+   
+</div>-->
+
+<!--var GivenDate = '2018-02-22';
+var CurrentDate = new Date();
+GivenDate = new Date(GivenDate);
+
+if(GivenDate > CurrentDate){
+    alert('Given date is greater than the current date.');
+}else{
+    alert('Given date is not greater than the current date.');
+}-->

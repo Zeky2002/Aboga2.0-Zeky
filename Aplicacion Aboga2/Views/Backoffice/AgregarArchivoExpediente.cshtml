@@ -1,0 +1,22 @@
+﻿@using Aplicacion_Aboga2.Models
+@model ExpedienteArchivo
+@{
+    {
+        ViewBag.Title = "AgregarArchivoExpediente";
+    }
+
+
+<h1>AgregarArchivoExpediente</h1>
+
+
+    @Html.ActionLink("Volver atras", "ABMExpedientes", "Backoffice")
+
+    using (Html.BeginForm("AgregarArchivo", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <label for="file1">Archivos</label>
+        <input type="file" draggable="true" name="archivo" id="file1" />
+        <label>Ingrese el nombre: </label><input type = "text" name = "Nombre" /><br/>
+        <input type="hidden" name="IdEx" value="@ViewBag.IdExpediente" />
+        <input type="submit" />
+        }
+    }

@@ -1,0 +1,35 @@
+﻿@using Aplicacion_Aboga2.Models
+@model Archivos
+@{
+    ViewBag.Title = "AgregarArchivoEve";
+}
+
+<h1>InsertarArchivoEve</h1>
+
+<button id="btnAtras">Volver atras</button>
+<br />
+<br />
+<table>
+    @using (Html.BeginForm("AgregarArchivoEve", "Backoffice", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.IdArchivo)
+
+        <tr>
+            <td> @Html.Label("Nombre")</td>
+            <td> @Html.TextBoxFor(x => x.Nombre, new { @id = "Nombre", @required = "required", value = Model.Nombre })</td>
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </tr>
+
+        <input type="" value="AgregarArchivo" />
+        <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+        <input type="submit" value="AgregarArchivo" />
+    }
+
+
+</table>
+<script>
+    $(document).ready(function () {
+        $("#btnAtras").click(function () {
+            window.history.back();
+        });
+</script>

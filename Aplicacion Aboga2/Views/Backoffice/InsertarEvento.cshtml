@@ -1,0 +1,61 @@
+﻿@using Aplicacion_Aboga2.Models
+@model Evento
+@{
+    ViewBag.Title = "Insertar Evento";
+}
+
+<h1>InsertarEvento</h1>
+
+<button id="btnAtras">Volver atras</button>
+<br />
+<br />
+<table>
+    @using (Html.BeginForm("InsercionEvento", "Backoffice", FormMethod.Post))
+    {
+
+        @Html.TextBoxFor(x => x.IdExpediente, new { @id = "IdExpediente", value = Model.IdExpediente })
+        @Html.TextBoxFor(x => x.IdContacto, new { @id = "IdContacto", value = Model.IdContacto })
+
+        <tr>
+
+            <td> @Html.Label("Titulo")</td>
+            <td> @Html.TextBoxFor(x => x.Titulo, new { @id = "Titulo", @required = "required", value = Model.Titulo })</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Fecha"), </td>
+            <td> @Html.TextBoxFor(x => x.Fecha, "{0:yyyy-MM-dd}", new { @id = "FechaInicio", type = "date", @required = "required", value = Model.Fecha })</td>
+            @Html.ValidationMessageFor(model => model.Fecha)
+
+        </tr>
+        <tr>
+            <td> @Html.Label("Descripcion")</td>
+            <td> @Html.TextBoxFor(x => x.Descripcion, new { @id = "Descripcion", @required = "required", value = Model.Descripcion })</td>
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </tr>
+
+        <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+        <input type="hidden" name="IdEx" value="@ViewBag.Idex " />
+        <input type="hidden" name="IdCont" value="@ViewBag.IdCont" />
+        <input type="submit" value="InsertarEvento" />
+    }
+
+
+</table>
+<script>
+    $(document).ready(function () {
+        $("#btnAtras").click(function () {
+            window.history.back();
+        });
+        $('form').submit(function (e) {
+            let minimo = new Date($("01/01/1950").val());
+            let maximo = new Date($("01/01/2400").val());
+            let Fecha = new Date($("#Fecha").val());
+            if ((Fecha <= minimo) || (Fecha >= maximo)) {
+                alert("Error");
+                e.preventDefault();
+            } else {
+                alert("Exito");
+            }
+        });
+    }
+</script>
